@@ -7,6 +7,8 @@ export default {
         "gradient-to-br-custom":
           "linear-gradient(to bottom right, rgba(125, 213, 111, 0.85), rgba(40, 180, 135, 0.85))",
         "text-gradient": " linear-gradient(to right, #7dd56f, #28b487);",
+        "gradient-bg-section":
+          "linear-gradient(to right bottom, #7dd56f, #28b487);",
       },
     },
   },
