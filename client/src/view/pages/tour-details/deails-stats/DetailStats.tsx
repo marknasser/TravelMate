@@ -9,7 +9,7 @@ interface DetailStatsProps {
   name: string;
   description: string;
 
-  guids: UserTour[];
+  guides: UserTour[];
 
   startDates: string[];
   difficulty: TourDifficulty;
@@ -21,7 +21,7 @@ function DetailStats({
   name,
   description,
   difficulty,
-  guids,
+  guides,
   maxGroupSize,
   ratingsAverage,
   startDates,
@@ -36,7 +36,7 @@ function DetailStats({
           startDate={startDates[0]}
           difficulty={difficulty}
         />
-        <DetailStatsBox title="your tour guides" guids={guids} />
+        <DetailStatsBox title="your tour guides" guides={guides} />
       </div>
       <div className="lg:w-1/2 flex justify-center items-center flex-col lg:p-36 p-24">
         <h2 className="heading-secondary mb-11">{`About ${name} tour`}</h2>

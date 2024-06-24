@@ -1,6 +1,7 @@
 import React from "react";
 import { LuClock4 } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
+import useElementHeight from "../../../hooks/useElementHeight";
 
 interface DetailsHeaderProps {
   imageCover: string;
@@ -15,8 +16,14 @@ const DetailsHeader: React.FC<DetailsHeaderProps> = ({
   startLocationDescription,
   duration,
 }) => {
+  const headerHeight = useElementHeight("#header");
   return (
-    <div className="bg-slate-600 h-[600px] relative">
+    <div
+      className="bg-slate-600  relative"
+      style={{
+        height: `calc(100vh - ${headerHeight}px)`,
+      }}
+    >
       <img
         src={`http://127.0.0.1:8000/img/tours/${imageCover}`}
         alt=""

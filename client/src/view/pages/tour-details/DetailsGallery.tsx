@@ -20,6 +20,7 @@ const DetailsGallery: React.FC<DetailsGalleryProps> = ({ gallery }) => {
     slidesToScroll: 1,
     initialSlide: 0,
     autoplaySpeed: 1000,
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 1600,

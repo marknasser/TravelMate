@@ -29,7 +29,7 @@ export default {
     function ({ addUtilities }) {
       const newUtilities = {
         ".heading-secondary": {
-          fontSize: "1.5rem",
+          fontSize: "1.2rem",
           textTransform: "uppercase",
           fontWeight: "700",
           backgroundImage: "linear-gradient(to right, #7dd56f, #28b487)",

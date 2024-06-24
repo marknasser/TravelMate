@@ -22,9 +22,7 @@ function DetailsReviews({ reviews }: DetailsReviewsProps) {
 
   useLayoutEffect(() => {
     function updateSize() {
-      console.log("calllll", window.innerWidth);
       if (window.innerWidth <= 700) {
-        console.log("1");
         setSettings({ ...settings, slidesToShow: 1 });
       } else if (window.innerWidth <= 1200)
         setSettings({ ...settings, slidesToShow: 2 });

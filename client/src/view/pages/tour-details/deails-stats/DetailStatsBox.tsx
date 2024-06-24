@@ -20,7 +20,7 @@ const staticMiddleText = ["next fate", "difficulty", "paricipants", "rating"];
 interface DetailStatsBoxProps {
   title: string;
 
-  guids?: UserTour[];
+  guides?: UserTour[];
 
   startDate?: string;
   difficulty?: TourDifficulty;
@@ -31,14 +31,14 @@ interface DetailStatsBoxProps {
 const DetailStatsBox: React.FC<DetailStatsBoxProps> = ({
   title,
   difficulty,
-  guids,
+  guides,
   maxGroupSize,
   ratingsAverage,
   startDate,
 }) => {
   const renderBoxInfo = () => {
-    if (guids) {
-      return guids.map((guid, i) => {
+    if (guides) {
+      return guides.map((guid, i) => {
         return (
           <DetailStatsBoxInfo
             key={i + 1}

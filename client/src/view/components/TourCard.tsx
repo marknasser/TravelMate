@@ -7,14 +7,30 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 
 import { Link, useNavigate } from "react-router-dom";
 
+import Button from "./form/Button";
+import { IconType } from "react-icons";
+
 interface TourCardProps {
   data: BaseTour;
 }
 
 const TourCard: React.FC<TourCardProps> = ({ data }) => {
   const navigate = useNavigate();
+
+  const cardStatsData = [
+    { Icon: IoLocationOutline, info: data.startLocation.description },
+    {
+      Icon: SlCalender,
+      info: new Date(data.startDates[0]).toLocaleString("en-us", {
+        month: "long",
+        year: "numeric",
+      }),
+    },
+    { Icon: CiFlag1, info: `${data.locations.length + 1} stops` },
+    { Icon: MdOutlinePersonOutline, info: `${data.maxGroupSize} people` },
+  ];
   return (
-    <div className="w-[350px] ">
+    <div className="w-[350px] shadow-sm bg-white rounded-md overflow-hidden">
       <div className="relative h-64">
         <img
           src={`http://127.0.0.1:8000/img/tours/${data.imageCover}`}
@@ -31,32 +47,12 @@ const TourCard: React.FC<TourCardProps> = ({ data }) => {
         <p className="line-clamp-1">{data.summary}</p>
       </div>
       <div className="p-6 flex justify-center flex-wrap text-[#777]">
-        <div className="w-2/4 flex items-center justify-start gap-3 mb-4 text-lg">
-          <IoLocationOutline className="text-3xl text-[#55c57a]" />
-          <span className="text-sm"> {data.startLocation.description}</span>
-        </div>
-        <div className="w-2/4 flex items-center justify-start gap-3 mb-4 text-lg">
-          <SlCalender className="text-3xl text-[#55c57a]" />
-          <span className="text-sm">
-            {new Date(data.startDates[0]).toLocaleString("en-us", {
-              month: "long",
-              year: "numeric",
-            })}
-          </span>
-        </div>
-        <div className="w-2/4 flex items-center justify-start gap-3 mb-4 text-lg">
-          <CiFlag1 className="text-3xl text-[#55c57a]" />
-          <span className="text-sm">
-            {" "}
-            {`${data.locations.length + 1} stops`}
-          </span>
-        </div>
-        <div className="w-2/4 flex items-center justify-start gap-3 mb-4 text-lg">
-          <MdOutlinePersonOutline className="text-3xl text-[#55c57a]" />
-          <span className="text-sm">{`${data.maxGroupSize} people`}</span>
-        </div>
+        {cardStatsData.map((stat, index) => (
+          <TourCardStats key={index} Icon={stat.Icon} info={stat.info} />
+        ))}
       </div>
-      <div className="bg-[#f7f7f7]  flex justify-between p-6">
+
+      <div className="bg-[#f7f7f7]  flex justify-between p-6 border-t-slate-300">
         <div className="text-[#777]">
           <div>
             <span className="font-bold">${data.price}</span>
@@ -67,15 +63,28 @@ const TourCard: React.FC<TourCardProps> = ({ data }) => {
             {`rating (${data.ratingsQuantity})`}
           </div>
         </div>
-        <button
+        <Button
+          text="details"
           onClick={() => navigate(`/tour/${data._id}`)}
-          className="block px-4 rounded-full uppercase w-fit bg-[#55c57a] text-white"
-        >
-          details
-        </button>
+          bgColor="#55c57a"
+        />
       </div>
     </div>
   );
 };
 
 export default TourCard;
+
+interface TourCardStatsProps {
+  Icon: IconType;
+  info: string;
+}
+
+export const TourCardStats: React.FC<TourCardStatsProps> = ({ Icon, info }) => {
+  return (
+    <div className="w-2/4 flex items-center justify-start gap-3 mb-4 text-lg">
+      <Icon className="text-xl text-[#55c57a]" />
+      <span className="text-sm"> {info}</span>
+    </div>
+  );
+};

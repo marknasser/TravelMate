@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { toursActions } from "../../store/tours/reducer";
+import Spinner from "../components/Spinner";
+
+import BaseContainer from "../layouts/BaseContainer";
 
 import TourCard from "../components/TourCard";
 import { BaseTour } from "../../types/general";
@@ -11,29 +14,44 @@ function Home() {
   const dispatch = useDispatch();
 
   const [tours, setTours] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     dispatch(getAllTours());
   }, [dispatch]);
 
   useEffect(() => {
-    const call = async () => {
-      const res = await fetch("http://127.0.0.1:8000/api/v1/tours");
-      const prods = await res.json();
-      setTours(prods.data.docs);
-      console.log(tours[0]);
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/v1/tours");
+        console.log(res);
+        if (!res.ok) {
+          throw new Error("Failed to fetch");
+        }
+        const data = await res.json();
+        setTours(data.data.docs);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Optionally, handle error state or notify the user
+      } finally {
+        setIsLoading(false);
+      }
     };
-    try {
-      call();
-    } catch (error) {
-      console.log("errorr");
-    }
+
+    fetchData();
   }, []);
+
   return (
-    <div className="flex  justify-center items-stretch flex-wrap gap-20 p-20">
-      {tours.length > 0 &&
-        tours.map((tour: BaseTour) => <TourCard key={tour._id} data={tour} />)}
-    </div>
+    <BaseContainer>
+      <div className="flex  justify-center items-stretch flex-wrap gap-20 p-20 bg-[#f5f5f5]">
+        {tours.length > 0 && !isLoading ? (
+          tours.map((tour: BaseTour) => <TourCard key={tour._id} data={tour} />)
+        ) : (
+          <Spinner />
+        )}
+      </div>
+    </BaseContainer>
   );
 }
 
