@@ -15,6 +15,7 @@ function Home() {
 
   const [tours, setTours] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     dispatch(getAllTours());
@@ -25,7 +26,6 @@ function Home() {
       setIsLoading(true);
       try {
         const res = await fetch("http://127.0.0.1:8000/api/v1/tours");
-        console.log(res);
         if (!res.ok) {
           throw new Error("Failed to fetch");
         }
@@ -33,7 +33,6 @@ function Home() {
         setTours(data.data.docs);
       } catch (error) {
         console.error("Error fetching data:", error);
-        // Optionally, handle error state or notify the user
       } finally {
         setIsLoading(false);
       }

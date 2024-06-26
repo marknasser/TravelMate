@@ -42,7 +42,14 @@ export type Tour = BaseTour & {
 };
 
 // _________USERS TYPES_________
-export type User = {};
+export type User = {
+  email: string;
+  name: string;
+  photo: string;
+  role: string;
+  __v: number;
+  _id: string;
+};
 
 export type UserView = {
   photo: string;

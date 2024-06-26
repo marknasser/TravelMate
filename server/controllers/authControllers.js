@@ -22,6 +22,8 @@ const createSendToken = (currentUser, status, res) => {
     ),
     // secure: true, //we're using https >> cooki will onlt be sent over an encrypted connection
     httpOnly: true, //cookie canot be accessed  or modified by any why by the browser
+    sameSite: 'None', // Add this line if you're using HTTPS and want to share cookies across domains
+    secure: true,
   };
 
   if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
@@ -253,6 +255,40 @@ const isLoggedIn = async (req, res, next) => {
   next();
 };
 
+//for check the cokkies when re-open the app not for render pages will be errors
+const checkIsLoggedIn = catchAsync(async (req, res, next) => {
+  console.log('checking...', req.cookies.jwt);
+  if (!req.cookies.jwt) {
+    console.log('hereee');
+    return next(new AppError('you are not logged in', 401));
+  }
+
+  // 1) verify the token
+  const decoded = await promisify(jwt.verify)(
+    req.cookies.jwt,
+    process.env.JWT_SECRET
+  );
+  // 2) if the user still exist in DB
+  const currentUser = await User.findById(decoded.id);
+  if (!currentUser) {
+    return next(new AppError('the user is no longer available', 401));
+  }
+  // 3) if user recently change his pass
+  const isPassChangedAfterJWTIssued = currentUser.changedPasswordAfter(
+    decoded.iat
+  );
+  if (isPassChangedAfterJWTIssued) {
+    return next(new AppError('session timeout', 401));
+  }
+  //there is an loged in user
+  currentUser.password = undefined; // that should remove the pass only from the output
+  res.status(200).json({
+    status: 'success',
+    token: req.cookies.jwt,
+    data: { user: currentUser },
+  });
+});
+
 const logout = (req, res) => {
   res.cookie('jwt', 'dummy token', {
     expires: new Date(Date.now() + 10 * 1000),
@@ -271,4 +307,5 @@ module.exports = {
   updatePassword,
   isLoggedIn,
   logout,
+  checkIsLoggedIn,
 };

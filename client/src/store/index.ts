@@ -1,11 +1,12 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import counterSlice from "./couterSlice";
+
 import toursReducer from "./tours";
+import authReducer from "./auth";
 
 //create root reducer to combine all the reducers from all the slises
 const rootReducer = combineReducers({
-  counter: counterSlice,
   tours: toursReducer,
+  auth: authReducer,
 });
 
 //create store

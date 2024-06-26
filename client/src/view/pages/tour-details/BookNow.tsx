@@ -10,7 +10,7 @@ const BookNow: React.FC<BookNowProps> = ({ gallery }) => {
   return (
     <div className="bg-[#f7f7f7] w-full  h-[300px] flex justify-center items-center">
       <div className="bg-white w-4/5 flex justify-between items-center px-6 py-12 rounded-2xl ">
-        <div>imgs</div>
+        {/* <div>imgs</div> */}
         <div>
           <h3 className="uppercase heading-secondary text-sm">
             WHAT ARE YOU WAITING FOR?

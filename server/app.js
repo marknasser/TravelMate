@@ -23,9 +23,17 @@ const app = express(); // is a Function when calling will add a punch of methods
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
+// 8) cookieParser
+app.use(cookieParser());
+
 // 2) implement CORS
-app.use(cors());
-app.options('*', cors());
+const corsOptions = {
+  origin: 'http://localhost:5173', // Replace with your React app's URL
+  credentials: true,
+};
+app.use(cors(corsOptions));
+// app.use(cors());
+// app.options('*', cors());
 // 3) servring static files
 app.use(express.static(path.join(__dirname, 'public'))); // so when we open a URL that it can't find in any of routs it will then look in that public folder that we defined and set that folder to the root
 
@@ -50,8 +58,6 @@ app.use(
     limit: '10kb',
   })
 );
-// 8) cookieParser
-app.use(cookieParser());
 
 // 9) Data sanitization againes nosql query injection >>> Data sanitization:means to clean all the data that comes to app from melious code
 app.use(mongoSanitize());

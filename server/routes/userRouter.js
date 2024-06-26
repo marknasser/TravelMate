@@ -22,12 +22,14 @@ const {
   protect,
   restrictTo,
   logout,
+  checkIsLoggedIn,
 } = require('../controllers/authControllers');
 
 const router = express.Router();
 //public Routs
 router.post('/signup', signup);
 router.post('/login', login);
+router.get('/isLoggedIn', checkIsLoggedIn);
 router.get('/logout', logout);
 router.patch('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
