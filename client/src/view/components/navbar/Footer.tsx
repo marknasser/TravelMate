@@ -9,9 +9,9 @@ function Footer() {
   return (
     <div
       id="footer"
-      className="flex-col md:flex-row gap-4   flex justify-between  items-center py-5 px-7  lg:py-7 lg:px-10 "
+      className="flex-col md:flex-row gap-4   flex justify-between  items-center py-4 px-6   "
     >
-      <figure className="w-28 md:w-36 ">
+      <figure className="w-28  ">
         <NavLink to={"/"}>
           <img src={logoGreen} alt="" className="w-full h-full" />
         </NavLink>

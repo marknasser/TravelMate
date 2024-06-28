@@ -293,9 +293,12 @@ const logout = (req, res) => {
   res.cookie('jwt', 'dummy token', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    sameSite: 'None',
+    secure: true,
   });
   res.status(200).json({ status: 'success' });
 };
+
 module.exports = {
   signToken,
   signup,

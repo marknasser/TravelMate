@@ -25,32 +25,6 @@ function Login() {
     },
   });
 
-  // const onSubmit: SubmitHandler<FieldValues> = async (credentials) => {
-  //   setIsLoading(true);
-  //   try {
-  //     const res = await fetch("http://127.0.0.1:8000/api/v1/users/login", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         ...credentials,
-  //       }),
-  //       headers: {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //       },
-  //       credentials: "include",
-  //     });
-  //     console.log(res);
-  //     if (!res.ok) {
-  //       throw new Error("Failed to fetch");
-  //     }
-  //     const user = await res.json();
-  //     console.log("currentUser", user.data.user);
-  //     // setTours(data.data.docs);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
   const onSubmit: SubmitHandler<FieldValues> = (credentials) => {
     dispatch(signIn(credentials));
   };

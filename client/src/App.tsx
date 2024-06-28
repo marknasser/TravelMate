@@ -1,4 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+// Layouts
+import AuthLayout from "./view/layouts/AuthLayout";
 
 // components
 import Header from "./view/components/navbar/Header";
@@ -9,7 +11,9 @@ import Home from "./view/pages/Home";
 import TourDetails from "./view/pages/tour-details";
 import Login from "./view/pages/auth/Login";
 import Signup from "./view/pages/auth/Signup";
+import Dashboard from "./view/pages/dashboard";
 import NotFound from "./view/pages/NotFound";
+
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -22,7 +26,6 @@ function App() {
   const isPending = useSelector((state: any) => state.auth.isPending);
   const user = useSelector((state: any) => state.auth.currentUser);
 
-  console.log("user", user);
   useEffect(() => {
     dispatch(checkIsLoggedIn());
   }, [dispatch]);
@@ -33,9 +36,17 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/tour/:id" element={<TourDetails />} />
+          <Route path="/tour/:id" element={<TourDetails />} />0
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/dashboard/*"
+            element={
+              <AuthLayout>
+                <Dashboard />
+              </AuthLayout>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
