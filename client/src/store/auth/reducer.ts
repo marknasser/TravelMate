@@ -24,6 +24,11 @@ const authReducer = createSlice({
       state.errorMessage = null;
     },
 
+    updateMe: (state, action) => {
+      console.log("updateMe reducer", action.payload);
+      // state.currentUser=action.payload
+    },
+
     process_pending: (state, action) => {
       state.isPending = action.payload;
     },

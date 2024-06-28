@@ -55,11 +55,11 @@ const TourCard: React.FC<TourCardProps> = ({ data }) => {
       <div className="bg-[#f7f7f7]  flex justify-between p-6 border-t-slate-300">
         <div className="text-[#777]">
           <div>
-            <span className="font-bold">${data.price}</span>
+            <span className="font-bold mr-1">${data.price}</span>
             <span>per person</span>
           </div>
           <div>
-            <span className="font-bold">${data.ratingsAverage}</span>
+            <span className="font-bold mr-1">${data.ratingsAverage}</span>
             {`rating (${data.ratingsQuantity})`}
           </div>
         </div>

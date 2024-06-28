@@ -21,10 +21,10 @@ const Input: React.FC<InputProps> = ({
   required,
 }) => {
   return (
-    <div className="flex justify-between items-start gap-2 flex-col w-full">
-      <label className="text-[#777] font-semibold text-base">{label}</label>
+    <div className="text-[#777] flex justify-between items-start gap-2 flex-col w-full">
+      <label className=" font-semibold text-base">{label}</label>
       <input
-        className={`bg-[#f2f2f2]   px-5 py-2 outline-none w-full  
+        className={`bg-[#f2f2f2] font-light  px-5 py-2 outline-none w-full  
         `}
         type={type}
         placeholder={placeholder}

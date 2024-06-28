@@ -21,7 +21,7 @@ const multerStorage = multer.memoryStorage(); // image will be saved as a buffer
 //so we keep the image in memmory to keep it then we resize it when it stills a buffer
 const multerFilter = (req, file, cb) => {
   //filter the uploded file is an image
-
+  console.log('file', file);
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {

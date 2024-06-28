@@ -7,7 +7,7 @@ function DashboardLayout({ children }: any) {
 
   return (
     <div
-      className="flex justify-between items-stretch bg-[#f7f7f7]  w-full p-20"
+      className="flex justify-between items-stretch bg-[#f7f7f7]  w-full lg:p-20 p-5 "
       style={{ minHeight: `calc(100vh - ${headerHeight + footerHeight}px)` }}
     >
       {children}
