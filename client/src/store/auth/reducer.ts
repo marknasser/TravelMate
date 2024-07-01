@@ -9,6 +9,7 @@ const authReducer = createSlice({
     errorMessage: null,
     isPending: false,
   },
+
   reducers: {
     login: (state, action) => {
       state.token = action.payload.token;

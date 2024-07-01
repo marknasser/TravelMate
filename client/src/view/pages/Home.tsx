@@ -25,7 +25,9 @@ function Home() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/v1/tours");
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/v1/tours`
+        );
         if (!res.ok) {
           throw new Error("Failed to fetch");
         }

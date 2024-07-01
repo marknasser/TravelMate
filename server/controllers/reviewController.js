@@ -15,6 +15,7 @@ const setTourUserIds = async (req, res, next) => {
 
   next();
 };
+
 const createReview = factory.createOne(Review);
 const getAllReviews = factory.getAll(Review);
 const deleteReview = factory.deleteOne(Review);

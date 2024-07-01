@@ -3,8 +3,9 @@ import Button from "../../components/form/Button";
 import Input from "../../components/form/Input";
 import BaseContainer from "../../layouts/BaseContainer";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../../store/auth/operations";
+import { Navigate } from "react-router-dom";
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +13,7 @@ function Login() {
   const [currentUser, setCurrentUser] = useState<any>();
 
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);
 
   const {
     register,
@@ -28,6 +30,10 @@ function Login() {
   const onSubmit: SubmitHandler<FieldValues> = (credentials) => {
     dispatch(signIn(credentials));
   };
+
+  if (!isLoggedIn) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <BaseContainer>

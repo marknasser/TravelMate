@@ -4,7 +4,9 @@ import axios from "axios";
 export function getAllTours() {
   return async (dispatch) => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/v1/tours");
+      const res = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/v1/tours`
+      );
       dispatch(toursActions.setAllTours(res.data.data.docs));
       return res.data.data.docs;
     } catch (error) {

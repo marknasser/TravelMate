@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 // 2) implement CORS
 const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with your React app's URL
+  origin: process.env.REACT_URL, // Replace with your React app's URL
   credentials: true,
 };
 app.use(cors(corsOptions));

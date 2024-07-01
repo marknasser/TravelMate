@@ -22,9 +22,6 @@ import { checkIsLoggedIn } from "./store/auth/operations";
 import { useDispatch } from "react-redux";
 function App() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);
-  const isPending = useSelector((state: any) => state.auth.isPending);
-  const user = useSelector((state: any) => state.auth.currentUser);
 
   useEffect(() => {
     dispatch(checkIsLoggedIn());
@@ -47,7 +44,7 @@ function App() {
               </AuthLayout>
             }
           />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound onClick={() => {}} />} />
         </Routes>
 
         <Footer />

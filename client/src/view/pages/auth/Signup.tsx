@@ -5,7 +5,14 @@ import Input from "../../components/form/Input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Button from "../../components/form/Button";
 
+import { useDispatch, useSelector } from "react-redux";
+import { signUp } from "../../../store/auth/operations";
+import { Navigate } from "react-router-dom";
+
 function Signup() {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);
+
   const {
     register,
     handleSubmit,
@@ -20,7 +27,14 @@ function Signup() {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = (credentials) => {
+    dispatch(signUp(credentials));
+  };
+
+  if (!isLoggedIn) {
+    return <Navigate to={"/"} />;
+  }
+
   return (
     <BaseContainer>
       <form
@@ -69,7 +83,7 @@ function Signup() {
           errors={errors}
         />
 
-        <Button text="Log in" type="submit" />
+        <Button text="Sign Up" type="submit" />
       </form>
     </BaseContainer>
   );
