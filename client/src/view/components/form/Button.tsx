@@ -13,7 +13,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
   type = "button",
-  bgColor = "#55c57a",
+  bgColor = "#ec8c6f",
   text,
   border = false,
   textColor = "#fff",
@@ -23,10 +23,14 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`font-light px-4 py-2 rounded-full uppercase text-[${textColor}] bg-[${bgColor}]
+      className={`font-light px-4 py-2 rounded-full uppercase 
          ${bigSize ? "text-sm md:text-lg" : "text-sm md:text-base"}
          ${border ? "border" : ""} 
-         ${extraStyle} `}
+         ${extraStyle}`}
+      style={{
+        backgroundColor: bgColor,
+        color: textColor,
+      }}
       type={type}
       onClick={onClick}
     >

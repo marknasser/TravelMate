@@ -25,8 +25,7 @@ const authReducer = createSlice({
     },
 
     updateMe: (state, action) => {
-      console.log("updateMe reducer", action.payload);
-      // state.currentUser=action.payload
+      state.currentUser = action.payload;
     },
 
     process_pending: (state, action) => {

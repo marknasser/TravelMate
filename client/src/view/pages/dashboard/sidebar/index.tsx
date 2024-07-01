@@ -25,7 +25,7 @@ function SideBar() {
       isActive ? "dashboard_activeLink" : ""
     }`;
   return (
-    <div className="gradient-bg-section w-fit xl:w-1/4 min-h-full py-10 text-[#fff] text-xs  xl:text-base font-light uppercase">
+    <div className="bg-gradient-bg-section w-fit xl:w-1/4 min-h-full py-10 text-[#fff] text-xs  xl:text-base font-light uppercase">
       <ul className="flex flex-col gap-3">
         <li>
           <NavLink end to="" className={checkIsActive}>

@@ -9,13 +9,12 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { BiUpload } from "react-icons/bi";
 import { FaDeleteLeft } from "react-icons/fa6";
 import axios from "axios";
+import { authActions } from "../../../../store/auth/reducer";
 
 function AccountSettings() {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state: any) => state.auth.currentUser);
-
-  console.log("currentUser", currentUser);
 
   const [loading, setLoading] = useState(false);
   const [wrongImageType, setWrongImageType] = useState(false);
@@ -26,22 +25,22 @@ function AccountSettings() {
   const [imageValue, setImageValue] = useState(null);
 
   const previewImage = (e) => {
-    const { type, name } = e.target.files[0];
-    setImageAsset(URL.createObjectURL(e.target.files[0]));
-    setImageValue(e.target.files[0]);
-
-    // if (
-    //   type === "image/png" ||
-    //   type === "image/svg" ||
-    //   type === "image/jpeg" ||
-    //   type === "image/gif" ||
-    //   type === "image/tiff"
-    // ) {
-    //   setWrongImageType(false);
-    //   setLoading(true);
-    // } else {
-    //   setWrongImageType(true);
-    // }
+    const file = e.target.files[0];
+    const { type } = file;
+    if (
+      type === "image/png" ||
+      type === "image/svg" ||
+      type === "image/jpeg" ||
+      type === "image/gif" ||
+      type === "image/tiff"
+    ) {
+      setWrongImageType(false);
+      setLoading(true);
+      setImageAsset(URL.createObjectURL(file));
+      setImageValue(file);
+    } else {
+      setWrongImageType(true);
+    }
   };
 
   const {
@@ -55,25 +54,31 @@ function AccountSettings() {
       photo: imageValue,
     },
   });
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // dispatch(signIn(credentials));
-    const modifiedData = { ...data, photo: imageValue };
-    console.log(modifiedData);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    if (imageValue) {
+      formData.append("photo", imageValue);
+    }
+
     try {
       const res = await axios.patch(
         "http://127.0.0.1:8000/api/v1/users/updateMe",
-        modifiedData,
+        formData,
         {
-          headers: { "Content-type": "application/json; charset=UTF-8" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
           withCredentials: true,
         }
       );
-
-      console.log(res);
+      console.log(res.data.data.user);
+      dispatch(authActions.updateMe(res.data.data.user));
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
     }
   };
 
@@ -148,15 +153,24 @@ function AccountSettings() {
           </label>
         </div>
 
-        <Button
-          text="save settings"
-          type="submit"
-          bgColor="#55c57a"
-          extraStyle="self-end mt-5"
-        />
+        <Button text="save settings" type="submit" extraStyle="self-end mt-5" />
       </form>
     </div>
   );
 }
 
 export default AccountSettings;
+
+/*
+Key Differences and Reasons for Using FormData
+Handling File Uploads: FormData is designed to handle files. When you append a file to FormData, it correctly sets the Content-Type to multipart/form-data and encodes the file properly for transmission to the server.
+
+Server Compatibility: Many server-side frameworks and libraries are configured to handle multipart/form-data for file uploads, making it easier to process and store files sent this way.
+
+Automatic Boundary Setting: FormData automatically sets the boundary string in the Content-Type header which is crucial for multipart/form-data requests. This boundary string is necessary to separate different parts of the form data, including files.
+
+Simplifies Complex Data: FormData simplifies the process of combining text and file data in a single request. Manually constructing such a request is complex and error-prone.
+
+In summary, using FormData ensures that the file is correctly encoded and sent in a way that the server can understand and process, which is not possible with a simple JSON object.
+
+*/

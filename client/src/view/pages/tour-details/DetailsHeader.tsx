@@ -19,7 +19,7 @@ const DetailsHeader: React.FC<DetailsHeaderProps> = ({
   const headerHeight = useElementHeight("#header");
   return (
     <div
-      className="bg-slate-600  relative"
+      className=" relative"
       style={{
         height: `calc(100vh - ${headerHeight}px)`,
       }}
@@ -30,7 +30,7 @@ const DetailsHeader: React.FC<DetailsHeaderProps> = ({
         className="w-full h-full object-cover"
       />
       <div className=" absolute top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2 text-white z-30 flex justify-between items-center flex-col">
-        <h1 className=" text-xl sm:text-3xl lg:text-6xl  p-4 w-fit z-40 text-white bg-gradient-to-br-custom">
+        <h1 className=" text-xl sm:text-3xl lg:text-6xl  p-4 w-fit z-40 text-white bg-gradient-bg-section">
           {name}
         </h1>
         {/* <h1 className="heading-primary">{name}</h1> */}
@@ -48,7 +48,7 @@ const DetailsHeader: React.FC<DetailsHeaderProps> = ({
         </div>
       </div>
 
-      <div className="w-full h-full bg-[#7dd56f] opacity-80 absolute z-10 top-0 left-0"></div>
+      <div className="w-full h-full bg-[#70dad3] opacity-80 absolute z-10 top-0 left-0"></div>
     </div>
   );
 };

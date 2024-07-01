@@ -54,12 +54,7 @@ function PasswordChange() {
           errors={errors}
         />
 
-        <Button
-          text="save password"
-          type="submit"
-          bgColor="#55c57a"
-          extraStyle="self-end mt-5"
-        />
+        <Button text="save password" type="submit" extraStyle="self-end mt-5" />
       </form>
     </div>
   );

@@ -77,6 +77,7 @@ const login = catchAsync(async (req, res, next) => {
 const protect = catchAsync(async (req, res, next) => {
   //[1] get token & check if it is exist
   let token;
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')

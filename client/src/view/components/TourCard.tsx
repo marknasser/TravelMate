@@ -37,14 +37,14 @@ const TourCard: React.FC<TourCardProps> = ({ data }) => {
           alt=""
           className="w-full h-full object-cover"
         />
-        <p className="text-xl absolute bottom-0 right-0 p-4 w-fit z-40 text-white bg-gradient-to-br-custom">
+        <p className="text-xl absolute bottom-0 right-0 p-4 w-fit z-40 text-white bg-gradient-bg-section">
           {data.name}
         </p>
-        <div className="w-full h-full bg-[#7dd56f] opacity-30 absolute z-10 top-0 left-0"></div>
+        <div className="w-full h-full bg-[#70dad3] opacity-30 absolute z-10 top-0 left-0"></div>
       </div>
       <div className="p-6 text-[#777] min-h-[60px] max-h-[60px]:">
         <p className="uppercase font-bold">{`${data.difficulty} ${data.duration}-day tour`}</p>
-        <p className="line-clamp-1">{data.summary}</p>
+        <p className="line-clamp-2">{data.summary}</p>
       </div>
       <div className="p-6 flex justify-center flex-wrap text-[#777]">
         {cardStatsData.map((stat, index) => (
@@ -63,11 +63,7 @@ const TourCard: React.FC<TourCardProps> = ({ data }) => {
             {`rating (${data.ratingsQuantity})`}
           </div>
         </div>
-        <Button
-          text="details"
-          onClick={() => navigate(`/tour/${data._id}`)}
-          bgColor="#55c57a"
-        />
+        <Button text="details" onClick={() => navigate(`/tour/${data._id}`)} />
       </div>
     </div>
   );
@@ -83,7 +79,7 @@ interface TourCardStatsProps {
 export const TourCardStats: React.FC<TourCardStatsProps> = ({ Icon, info }) => {
   return (
     <div className="w-2/4 flex items-center justify-start gap-3 mb-4 text-lg">
-      <Icon className="text-xl text-[#55c57a]" />
+      <Icon className="text-xl text-accent-100 " />
       <span className="text-sm"> {info}</span>
     </div>
   );

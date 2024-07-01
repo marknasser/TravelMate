@@ -10,10 +10,10 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { IoMdStarOutline } from "react-icons/io";
 
 const icons = [
-  <CiCalendar className="text-[#55c57a] font-bold text-2xl" />,
-  <TfiStatsUp className="text-[#55c57a] font-bold text-2xl" />,
-  <MdOutlinePersonOutline className="text-[#55c57a] font-bold text-2xl" />,
-  <IoMdStarOutline className="text-[#55c57a] font-bold text-2xl" />,
+  <CiCalendar className="text-accent-100 font-bold text-2xl" />,
+  <TfiStatsUp className="text-accent-100 font-bold text-2xl" />,
+  <MdOutlinePersonOutline className="text-accent-100 font-bold text-2xl" />,
+  <IoMdStarOutline className="text-accent-100 font-bold text-2xl" />,
 ];
 const staticMiddleText = ["next fate", "difficulty", "paricipants", "rating"];
 
